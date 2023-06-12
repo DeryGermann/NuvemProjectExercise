@@ -1,11 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using NuvemProjectExercise.Pharmacy.Service.Data;
+using NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<PharmacyContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.AddScoped<IPharmacyService, PharmacyService>();
 
 var app = builder.Build();
 
