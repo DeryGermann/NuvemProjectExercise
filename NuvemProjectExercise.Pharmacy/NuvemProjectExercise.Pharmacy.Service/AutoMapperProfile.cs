@@ -12,7 +12,7 @@ namespace NuvemProjectExercise.Pharmacy.Service
     {
         public AutoMapperProfile()
         {
-            CreateMap<PharmacyModel, GetPharmacyResponseDto>();
+            CreateMap<PharmacyModel, PharmacyResponseDto>();
             CreateMap<PharmacyModel, UpdatePharmacyRequestDto>();
         }
     }

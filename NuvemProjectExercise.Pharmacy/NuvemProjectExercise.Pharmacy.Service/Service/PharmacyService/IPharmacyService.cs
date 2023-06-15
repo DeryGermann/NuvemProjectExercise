@@ -9,8 +9,8 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
 {
     public interface IPharmacyService
     {
-        Task<PharmacyServiceResponse<List<GetPharmacyResponseDto>>> GetAllPharmacies();
-        Task<PharmacyServiceResponse<GetPharmacyResponseDto>> GetPharmacyById(int id);
-        Task<PharmacyServiceResponse<GetPharmacyResponseDto>> UpdatePharmacyById(int id, UpdatePharmacyRequestDto pharmacyModel);
+        Task<PharmacyServiceResponse<List<PharmacyResponseDto>>> GetAllPharmacies();
+        Task<PharmacyServiceResponse<PharmacyResponseDto>> GetPharmacyById(int id);
+        Task<PharmacyServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int id, UpdatePharmacyRequestDto pharmacyModel);
     }
 }

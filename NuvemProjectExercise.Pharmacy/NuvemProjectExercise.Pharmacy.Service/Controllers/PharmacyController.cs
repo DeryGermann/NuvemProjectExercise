@@ -21,21 +21,41 @@ namespace NuvemProjectExercise.Pharmacy.Service.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<PharmacyServiceResponse<List<GetPharmacyResponseDto>>>> Get()
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<PharmacyServiceResponse<List<PharmacyResponseDto>>>> Get()
         {
             return Ok(await _pharmacyService.GetAllPharmacies());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PharmacyServiceResponse<GetPharmacyResponseDto>>> GetSingle(int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> GetSingle(int id)
         {
-            return Ok(await _pharmacyService.GetPharmacyById(id));
+            return GetHttpStatus(await _pharmacyService.GetPharmacyById(id));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<PharmacyServiceResponse<GetPharmacyResponseDto>>> UpdateSingle(int id, [FromBody] UpdatePharmacyRequestDto pharmacyModel)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> UpdateSingle(int id, [FromBody] UpdatePharmacyRequestDto pharmacyModel)
         {
-            return Ok(await _pharmacyService.UpdatePharmacyById(id, pharmacyModel));
+            return GetHttpStatus(await _pharmacyService.UpdatePharmacyById(id, pharmacyModel));
+        }
+
+        private ActionResult<PharmacyServiceResponse<PharmacyResponseDto>> GetHttpStatus(PharmacyServiceResponse<PharmacyResponseDto> response)
+        {
+            switch (response.Status)
+            {
+                case "200":
+                    return Ok(response);
+                case "404":
+                    return NotFound(response);
+                default:
+                    return BadRequest(response);
+            }
         }
     }
 }
