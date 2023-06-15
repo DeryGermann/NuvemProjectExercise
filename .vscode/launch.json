@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/NuvemProjectExercise.Pharmacy/src/NuvemProjectExercise.Pharmacy.Service/bin/Debug/net7.0/NuvemProjectExercise.Pharmacy.Service.dll",
+            "program": "${workspaceFolder}/NuvemProjectExercise.Pharmacy/NuvemProjectExercise.Pharmacy.Service/bin/Debug/net7.0/NuvemProjectExercise.Pharmacy.Service.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/NuvemProjectExercise.Pharmacy/src/NuvemProjectExercise.Pharmacy.Service",
+            "cwd": "${workspaceFolder}/NuvemProjectExercise.Pharmacy/NuvemProjectExercise.Pharmacy.Service",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {

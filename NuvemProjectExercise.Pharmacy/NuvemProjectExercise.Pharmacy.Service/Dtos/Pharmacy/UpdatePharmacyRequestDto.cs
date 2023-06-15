@@ -13,7 +13,5 @@ namespace NuvemProjectExercise.Pharmacy.Service.Dtos.Pharmacy
         public string State { get; set; } = "Missing Pharamacy State";
         public string Zip { get; set; } = "Missing Pharamacy Zip";
         public int FilledPrescriptions { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
     }
 }
