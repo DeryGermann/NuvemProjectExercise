@@ -18,8 +18,3 @@ IF NOT EXISTS (
       WHERE name = N'NuvemProjectExercise'
       )
    CREATE DATABASE [NuvemProjectExercise];
-GO
-
-IF SERVERPROPERTY('ProductVersion') > '12'
-   ALTER DATABASE [NuvemProjectExercise] SET QUERY_STORE = ON;
-GO
