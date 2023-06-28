@@ -40,10 +40,10 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
             }
         }
 
-        public async Task<PharmacyServiceResponse<PharmacyResponseDto>> GetPharmacyById(int id)
+        public async Task<PharmacyServiceResponse<PharmacyResponseDto>> GetPharmacyById(int pharmacyID)
         {
             var pharmacies = await _pcontext.Pharmacies.ToListAsync();
-            var pharmacy = pharmacies.FirstOrDefault(p => p.Id == id);
+            var pharmacy = pharmacies.FirstOrDefault(p => p.PharmacyID == pharmacyID);
 
             if (pharmacy is not null) {
                 return new PharmacyServiceResponse<PharmacyResponseDto>() {
@@ -54,18 +54,18 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
 
             return new PharmacyServiceResponse<PharmacyResponseDto>() {
                 Data = null,
-                Message = $"Could not find pharmacy with Id: {id}",
+                Message = $"Could not find pharmacy with Id: {pharmacyID}",
                 Success = false,
                 Status = "404"
             };
         }
 
-        public async Task<PharmacyServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int id, UpdatePharmacyRequestDto pharmacyModel)
+        public async Task<PharmacyServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int pharmacyID, UpdatePharmacyRequestDto pharmacyModel)
         {
             PharmacyServiceResponse<PharmacyResponseDto> returnResult = new PharmacyServiceResponse<PharmacyResponseDto>();
             
             var pharmacies = await _pcontext.Pharmacies.ToListAsync();
-            var originalPharmacy = pharmacies.FirstOrDefault(p => p.Id == id);
+            var originalPharmacy = pharmacies.FirstOrDefault(p => p.PharmacyID == pharmacyID);
 
             if (originalPharmacy is not null) {
                 try
@@ -95,7 +95,7 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
 
             return new PharmacyServiceResponse<PharmacyResponseDto>() {
                 Data = null,
-                Message = $"Could not find pharmacy with Id: {id}",
+                Message = $"Could not find pharmacy with Id: {pharmacyID}",
                 Success = false,
                 Status = "404"
             };

@@ -22,27 +22,27 @@ namespace NuvemProjectExercise.Pharmacy.Service.Controllers
 
         [HttpGet("GetAll")]
         [ProducesResponseType(200)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(200)]
         public async Task<ActionResult<PharmacyServiceResponse<List<PharmacyResponseDto>>>> Get()
         {
             return Ok(await _pharmacyService.GetAllPharmacies());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{pharmacyID}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> GetSingle(int id)
+        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> GetSingle(int pharmacyID)
         {
-            return GetHttpStatus(await _pharmacyService.GetPharmacyById(id));
+            return GetHttpStatus(await _pharmacyService.GetPharmacyById(pharmacyID));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{pharmacyID}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> UpdateSingle(int id, [FromBody] UpdatePharmacyRequestDto pharmacyModel)
+        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> UpdateSingle(int pharmacyID, [FromBody] UpdatePharmacyRequestDto pharmacyModel)
         {
-            return GetHttpStatus(await _pharmacyService.UpdatePharmacyById(id, pharmacyModel));
+            return GetHttpStatus(await _pharmacyService.UpdatePharmacyById(pharmacyID, pharmacyModel));
         }
 
         private ActionResult<PharmacyServiceResponse<PharmacyResponseDto>> GetHttpStatus(PharmacyServiceResponse<PharmacyResponseDto> response)
