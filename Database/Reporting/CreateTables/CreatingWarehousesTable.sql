@@ -1,7 +1,6 @@
 USE NuvemProjectExercise;
 GO
 
--- Needs to be related to the Deliveries table
 IF EXISTS (SELECT name 
     FROM sys.tables
     WHERE name = 'Warehouses')
