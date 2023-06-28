@@ -11,7 +11,7 @@ IF EXISTS (SELECT name
         -- First Pharmacy
         INSERT INTO dbo.Pharmacies
         (
-            Name,
+            PharmacyName,
             Address,
             City,
             State,
@@ -35,7 +35,7 @@ IF EXISTS (SELECT name
         -- Second Pharmacy
         INSERT INTO dbo.Pharmacies
         (
-            Name,
+            PharmacyName,
             Address,
             City,
             State,
@@ -59,7 +59,7 @@ IF EXISTS (SELECT name
         -- Third Pharmacy
         INSERT INTO dbo.Pharmacies
         (
-            Name,
+            PharmacyName,
             Address,
             City,
             State,
@@ -83,7 +83,7 @@ IF EXISTS (SELECT name
         -- Fourth Pharmacy
         INSERT INTO dbo.Pharmacies
         (
-            Name,
+            PharmacyName,
             Address,
             City,
             State,
@@ -107,7 +107,7 @@ IF EXISTS (SELECT name
         -- Fifth Pharmacy
         INSERT INTO dbo.Pharmacies
         (
-            Name,
+            PharmacyName,
             Address,
             City,
             State,

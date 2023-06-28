@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using NuvemProjectExercise.Pharmacy.Service.Data;
 using NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService;
+using NuvemProjectExercise.Pharmacy.Service.Service.ReportingService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Connecting the DBContext using connection string
 builder.Services.AddDbContext<PharmacyContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<NuvemProjectExerciseContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
@@ -15,7 +18,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
+// Adding the IServices and Services
 builder.Services.AddScoped<IPharmacyService, PharmacyService>();
+builder.Services.AddScoped<IReportingService, ReportingService>();
 
 var app = builder.Build();
 

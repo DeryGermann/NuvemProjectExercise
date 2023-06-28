@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using NuvemProjectExercise.Pharmacy.Service.Dtos.Pharmacy;
 using NuvemProjectExercise.Pharmacy.Service.Models;
@@ -21,38 +17,38 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
             _pcontext = pcontext;
         }
 
-        public async Task<PharmacyServiceResponse<List<PharmacyResponseDto>>> GetAllPharmacies()
+        public async Task<ServiceResponse<List<PharmacyResponseDto>>> GetAllPharmacies()
         {
             try {
                 var pharmacies = await _pcontext.Pharmacies.ToListAsync();
 
-                return new PharmacyServiceResponse<List<PharmacyResponseDto>>() {
+                return new ServiceResponse<List<PharmacyResponseDto>>() {
                     Data = pharmacies.Select(p => _mapper.Map<PharmacyResponseDto>(p)).ToList(),
                     Status = "200"
                 };
             }
             catch
             {
-                return new PharmacyServiceResponse<List<PharmacyResponseDto>>() {
+                return new ServiceResponse<List<PharmacyResponseDto>>() {
                     Data = null,
                     Message = "An unknown error has occured. Please contact support."
                 };
             }
         }
 
-        public async Task<PharmacyServiceResponse<PharmacyResponseDto>> GetPharmacyById(int pharmacyID)
+        public async Task<ServiceResponse<PharmacyResponseDto>> GetPharmacyById(int pharmacyID)
         {
             var pharmacies = await _pcontext.Pharmacies.ToListAsync();
             var pharmacy = pharmacies.FirstOrDefault(p => p.PharmacyID == pharmacyID);
 
             if (pharmacy is not null) {
-                return new PharmacyServiceResponse<PharmacyResponseDto>() {
+                return new ServiceResponse<PharmacyResponseDto>() {
                     Data = _mapper.Map<PharmacyResponseDto>(pharmacy),
                     Status = "200"
                 };
             }
 
-            return new PharmacyServiceResponse<PharmacyResponseDto>() {
+            return new ServiceResponse<PharmacyResponseDto>() {
                 Data = null,
                 Message = $"Could not find pharmacy with Id: {pharmacyID}",
                 Success = false,
@@ -60,9 +56,9 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
             };
         }
 
-        public async Task<PharmacyServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int pharmacyID, UpdatePharmacyRequestDto pharmacyModel)
+        public async Task<ServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int pharmacyID, UpdatePharmacyRequestDto pharmacyModel)
         {
-            PharmacyServiceResponse<PharmacyResponseDto> returnResult = new PharmacyServiceResponse<PharmacyResponseDto>();
+            ServiceResponse<PharmacyResponseDto> returnResult = new ServiceResponse<PharmacyResponseDto>();
             
             var pharmacies = await _pcontext.Pharmacies.ToListAsync();
             var originalPharmacy = pharmacies.FirstOrDefault(p => p.PharmacyID == pharmacyID);
@@ -70,7 +66,7 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
             if (originalPharmacy is not null) {
                 try
                 {
-                    originalPharmacy.Name = !string.IsNullOrWhiteSpace(pharmacyModel.Name) ? pharmacyModel.Name : originalPharmacy.Name;
+                    originalPharmacy.PharmacyName = !string.IsNullOrWhiteSpace(pharmacyModel.PharmacyName) ? pharmacyModel.PharmacyName : originalPharmacy.PharmacyName;
                     originalPharmacy.Address = !string.IsNullOrWhiteSpace(pharmacyModel.Address) ? pharmacyModel.Address : originalPharmacy.Address;
                     originalPharmacy.City = !string.IsNullOrWhiteSpace(pharmacyModel.City) ? pharmacyModel.City : originalPharmacy.City;
                     originalPharmacy.State = !string.IsNullOrWhiteSpace(pharmacyModel.State) ? pharmacyModel.State : originalPharmacy.State;
@@ -93,7 +89,7 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
                 return returnResult;
             }
 
-            return new PharmacyServiceResponse<PharmacyResponseDto>() {
+            return new ServiceResponse<PharmacyResponseDto>() {
                 Data = null,
                 Message = $"Could not find pharmacy with Id: {pharmacyID}",
                 Success = false,

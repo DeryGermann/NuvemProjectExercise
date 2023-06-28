@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NuvemProjectExercise.Pharmacy.Service.Dtos.Pharmacy;
 using NuvemProjectExercise.Pharmacy.Service.Models;
@@ -23,7 +19,7 @@ namespace NuvemProjectExercise.Pharmacy.Service.Controllers
         [HttpGet("GetAll")]
         [ProducesResponseType(200)]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<PharmacyServiceResponse<List<PharmacyResponseDto>>>> Get()
+        public async Task<ActionResult<ServiceResponse<List<PharmacyResponseDto>>>> Get()
         {
             return Ok(await _pharmacyService.GetAllPharmacies());
         }
@@ -31,7 +27,7 @@ namespace NuvemProjectExercise.Pharmacy.Service.Controllers
         [HttpGet("{pharmacyID}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> GetSingle(int pharmacyID)
+        public async Task<ActionResult<ServiceResponse<PharmacyResponseDto>>> GetSingle(int pharmacyID)
         {
             return GetHttpStatus(await _pharmacyService.GetPharmacyById(pharmacyID));
         }
@@ -40,12 +36,12 @@ namespace NuvemProjectExercise.Pharmacy.Service.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult<PharmacyServiceResponse<PharmacyResponseDto>>> UpdateSingle(int pharmacyID, [FromBody] UpdatePharmacyRequestDto pharmacyModel)
+        public async Task<ActionResult<ServiceResponse<PharmacyResponseDto>>> UpdateSingle(int pharmacyID, [FromBody] UpdatePharmacyRequestDto pharmacyModel)
         {
             return GetHttpStatus(await _pharmacyService.UpdatePharmacyById(pharmacyID, pharmacyModel));
         }
 
-        private ActionResult<PharmacyServiceResponse<PharmacyResponseDto>> GetHttpStatus(PharmacyServiceResponse<PharmacyResponseDto> response)
+        private ActionResult<ServiceResponse<PharmacyResponseDto>> GetHttpStatus(ServiceResponse<PharmacyResponseDto> response)
         {
             switch (response.Status)
             {

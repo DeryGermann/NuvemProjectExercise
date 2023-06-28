@@ -22,3 +22,6 @@ IF NOT EXISTS (
     BEGIN
         CREATE DATABASE [NuvemProjectExercise];
     END
+
+-- Command used to create the database models using database first method
+-- dotnet ef dbcontext scaffold "Server=localhost; Database=NuvemProjectExercise; User Id=sa; Password=340BasicTestProject; Trusted_Connection=false; TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -o Models   

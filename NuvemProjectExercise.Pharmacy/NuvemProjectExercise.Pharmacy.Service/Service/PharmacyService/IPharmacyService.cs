@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using NuvemProjectExercise.Pharmacy.Service.Dtos.Pharmacy;
 using NuvemProjectExercise.Pharmacy.Service.Models;
 
@@ -9,8 +5,8 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.PharmacyService
 {
     public interface IPharmacyService
     {
-        Task<PharmacyServiceResponse<List<PharmacyResponseDto>>> GetAllPharmacies();
-        Task<PharmacyServiceResponse<PharmacyResponseDto>> GetPharmacyById(int pharmacyID);
-        Task<PharmacyServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int pharmacyID, UpdatePharmacyRequestDto pharmacyModel);
+        Task<ServiceResponse<List<PharmacyResponseDto>>> GetAllPharmacies();
+        Task<ServiceResponse<PharmacyResponseDto>> GetPharmacyById(int pharmacyID);
+        Task<ServiceResponse<PharmacyResponseDto>> UpdatePharmacyById(int pharmacyID, UpdatePharmacyRequestDto pharmacyModel);
     }
 }
