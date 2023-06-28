@@ -23,6 +23,7 @@ namespace NuvemProjectExercise.Pharmacy.Service.Service.ReportingService
                     from d in _rcontext.Deliveries
                     join p in _rcontext.Pharmacies on d.PharmacyId equals p.PharmacyId
                     join w in _rcontext.Warehouses on d.WarehouseId equals w.WarehouseId
+                    orderby d.DeliveryDate descending
                     select new DeliveryDetailResponseDto {
                         WarehouseFrom = w.WarehouseName,
                         PharmacyTo = p.PharmacyName,
