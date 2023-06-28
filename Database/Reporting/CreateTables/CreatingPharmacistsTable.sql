@@ -17,9 +17,9 @@ IF NOT EXISTS (SELECT name
         CREATE TABLE Pharmacists (
             PharmacistID int NOT NULL PRIMARY KEY IDENTITY(1,1),
             PharmacyID int FOREIGN KEY REFERENCES Pharmacies(PharmacyID),
-            PharmacistName nvarchar(50),
+            PharmacistName nvarchar(MAX),
             Age int,
-            PrimaryDrugSold nvarchar(200),
+            PrimaryDrugSold nvarchar(MAX),
             HireDate DATETIME
         );    
     END   
